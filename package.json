@@ -2,42 +2,30 @@
   "name": "metra-app",
   "version": "0.1.0",
   "private": true,
-  "engines": {
-    "node": "12.16.1"
-    },
   "dependencies": {
-    "@material-ui/core": "^4.9.7",
-    "@material-ui/icons": "^4.9.1",
-    "@material-ui/styles": "^4.9.6",
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.3.2",
-    "@testing-library/user-event": "^7.1.2",
-    "dom": "0.0.3",
-    "firebase": "^7.14.0",
-    "node-sass": "^4.13.1",
-    "rc-slider": "^9.2.4",
-    "react": "^16.13.1",
-    "react-color": "^2.17.3",
-    "react-dom": "^16.13.1",
-    "react-material-ui-form-validator": "^2.0.10",
-    "react-redux": "^7.2.0",
-    "react-router-dom": "^5.1.2",
-    "react-scripts": "3.4.1",
-    "react-sortable-hoc": "^1.11.0",
-    "react-transition-group": "^4.3.0",
-    "redux": "^4.0.5",
-    "redux-logger": "^3.0.6",
-    "reselect": "^4.0.0"
+    "firebase": "6.0.2",
+    "node-sass": "4.12.0",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-redux": "7.0.3",
+    "react-router-dom": "5.0.0",
+    "redux": "4.0.1",
+    "redux-logger": "3.0.6",
+    "redux-persist": "5.10.0",
+    "reselect": "4.0.0"
+  },
+  "devDependencies": {
+    "react-scripts": "3.0.0"
+  },
+  "resolutions": {
+    "babel-jest": "24.7.1"
   },
   "scripts": {
     "start": "react-scripts start",
-    
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-
-  
   "eslintConfig": {
     "extends": "react-app"
   },
@@ -52,8 +40,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "@fortawesome/fontawesome-free": "^5.13.0"
   }
 }
