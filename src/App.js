@@ -6,7 +6,7 @@ import PaletteList from './PaletteList';
 import SingleHomeItemPalette from './SingleHomeItemPalette';
 import NewPaletteForm from './NewPaletteForm';
 import homeItemIcons from './homeItemIcons'
-import {auth, createUserProfileDocument} from './firebase/firebase.utils';
+import {auth, createUserProfileDocument, addCollectionAndDocuments} from './firebase/firebase.utils';
 import SignInAndSignUp from './pages/signInAndSignUp/SignInAndSignUp';
 
 import Header from './components/header/header';
@@ -14,6 +14,7 @@ import Directory from './components/directory/directory';
 import ProjectPage from './pages/project/project';
 import CollectionPage from './pages/collection/collection';
 import {setCurrentUser} from './redux/user/user.actions';
+import {selectCollectionsForPreview} from './redux/project/project.selectors';
 import './App.css';
 class App extends Component {
   constructor(props){
@@ -33,7 +34,7 @@ class App extends Component {
   unSubscribeFromAuth = null;
 
   componentDidMount(){
-const {setCurrentUser} = this.props;
+const {setCurrentUser, collectionsArray} = this.props;
     this.unSubscribeFromAuth  = auth.onAuthStateChanged( async userAuth => {
      // this.setState({ currentUser: user})
      if(userAuth) {
@@ -46,7 +47,8 @@ const {setCurrentUser} = this.props;
          })
        })
      } else {
-       setCurrentUser(userAuth)
+       setCurrentUser(userAuth);
+       addCollectionAndDocuments('collections', collectionsArray)
      }
     })
   
@@ -147,7 +149,8 @@ this.setState(
 }
 
 const mapStateToProps = ({user}) => ({
-  currentUser: user.currentUser
+  currentUser: user.currentUser,
+  collectionsArray: selectCollectionsForPreview
 })
 const mapDispatchToProps = dispatch => ({
   setCurrentUser: user => dispatch(setCurrentUser(user))
