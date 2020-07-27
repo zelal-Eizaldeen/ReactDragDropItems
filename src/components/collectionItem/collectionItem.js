@@ -1,8 +1,5 @@
 import React from 'react';
-import CustomButton from '../customButton/customButton';
-
-//  import { addItem } from '../../redux/cart/cart.actions';
-
+import {Helmet} from 'react-helmet';
 import './collectionItem.scss';
 
 const CollectionItem = ({ item }) => {
@@ -10,6 +7,10 @@ const CollectionItem = ({ item }) => {
 
   return (
     <div className='collection-item'>
+       <Helmet>
+     <title>مقاولات عامة واستشارات هندسية</title>
+        <meta name="description" content="مقاولات الكويت إبداع في التصميم الهندسي والبناء بأفضل جودة" />
+   </Helmet>
       <div
         className='image'
         style={{

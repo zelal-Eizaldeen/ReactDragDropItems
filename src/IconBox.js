@@ -1,61 +1,59 @@
 import React, { Component } from 'react';
-import Slider from 'rc-slider';
-import {Link} from 'react-router-dom';
+import {withStyles} from '@material-ui/styles';
+import {storage} from './firebase/firebase.utils';
 
-import 'rc-slider/assets/index.css';
+const styles = {
 
-import "./IconBox.css";
-
-
-export default class IconBox extends Component {
-   
-    render() {
-        const {name, backgroundImage, width, 
-            height,  changeHeight, changeWidth, moreUrl} = this.props;
+    root: {
      
-        return (
-           
-           
-            <div style={{backgroundImage}} className="IconBox">
- <div className="slider-h-container">
-     <span className='width-slider'>Width: {width}</span>
- <div className='slider-horizontal'>
-            <Slider 
-             step={1}
-             defaultValue={width}
-             min={1} 
-             max={500}
-        //    onAfterChange={changeWidth}
-             onChange={changeWidth}
-          
-              />
-            </div>
-                </div>
+    display: "inline-block",
+    cursor: "pointer",
+    backgroundSize: "cover",
+     opacity: "0.8",
+    "&:hover svg": {
+        color: "grey",
+        transform: "scale(1.5)"
+    },
+ 
+    },
+    iconName: {
+        marginRight: "2px" ,
+        display: 'block'
+    },
+    deleteIcon: {
+        color: "rgba(0, 0, 0, 0.5)",
+        display: 'block',
+        margin: '2px',
+        transition: "all 0.3s ease-in-out"
+    },
+    icons: {
+        fontSize: "3rem"
+        
+    }
+   
+   
+}
+ class IconBox extends Component {
+    render() {
+      
+         const {key, name, background, positionX, positionY, classes} = this.props;
+      
+        return(
        
-                 <div className='copy-container'>
-                    <div className='box-content'>
-                    <span>{name}</span>
-                    </div>
-                 
-                </div>
-                <div className='slider-v-container'>
-                    <Link to={moreUrl} onClick={e => e.stopPropagation()}> 
-                    <span className='height-slider'>Height: {height}</span>
-                    </Link>
-                <div className='slider-vertical'>
-                <Slider 
-               vertical
-            defaultValue={height}
-             min={5} 
-             max={500}
-             onChange={changeHeight}
-             
-             />
-                </div>
-                </div>
-              
-        </div>
+        <div key={key} className={classes.root} 
+          style={{ 
+         position: "absolute",
+        left: `${positionX}px`, top: `${positionY}px`, 
+     }}
+        >
+        <span className={classes.iconName}> {name}</span>
+        <i className={`${background} ${classes.icons}`}
+        ></i> 
+           
+     </div>
         
         );
     }
 }
+ 
+export default withStyles(styles)(IconBox);

@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
-import {Link} from 'react-router-dom';
 import {withStyles} from '@material-ui/styles';
 import {CSSTransition, TransitionGroup} from 'react-transition-group';
 import MiniPalette from './MiniPalette';
 import sizes from './styles/sizes';
 import bg from './styles/bg.svg'
 
+
 const styles = {
     root: {
-        
+       
         height: "100vh",
         display: "flex",
         alignItems: "flex-start",
@@ -23,9 +23,10 @@ const styles = {
 
     },
     heading: {
-fontSize: "2rem"
+     fontSize: "2rem"
     },
     container: {
+        padding: "150px 80px",
        width: "50%",
        display: "flex",
        alignItems: "flex-start",
@@ -63,11 +64,20 @@ fontSize: "2rem"
     }
 }
 class PaletteList extends Component {
-    goToPalette(id) {
-        this.props.history.push(`/palette/${id}`);
+    state = {
+        fetchDesigns: [],
+        fetchDesignsById: []
     }
+  
+    goToDesign(id){
+      this.props.history.push(`/design/${id}`);
+
+    }
+   
+  
     render() {
-        const {palettes, classes, deletePalette} = this.props;
+       
+        const { classes, deleteDesignById, fetchDesigns} = this.props; 
 
         return (
             <div className={classes.root}> 
@@ -75,23 +85,35 @@ class PaletteList extends Component {
 
                 <nav className={classes.nav}>
                     <h1 className={classes.heading}>Metra</h1>
-                    <Link to='/palette/new'>Create a Design</Link>
+
+                    {/* <Link to='/'>Create a Design</Link> */}
                     </nav>
                  
                         <TransitionGroup className={classes.palettes}>
-                        {palettes.map(palette => (
-                            <CSSTransition key={palette.id} 
+                       
+                       { 
+                                fetchDesigns.map(design => (
+
+                            <CSSTransition key={design.id} 
                             classNames="fade" timeout={500}>
                                     <MiniPalette 
-                                    {...palette} 
-                                    handleClick={()=> this.goToPalette(palette.id)}
-                                    handleDeletePalette={deletePalette}
-                                    key={palette.id}
-                                    id={palette.id}
+                                    // designs={designs}
+                                    id={design.id}
+                                    email={design.config.email}
+                                    {...design} 
+                                    handleClick={()=> this.goToDesign(design.id)}
+                                    deleteDesignById={deleteDesignById}
+                                    key={design.id}
+                                    id={design.id}
+                                    loading={this.props.loading}
+                                   
                                     />
                                 </CSSTransition>
-                                ))}
+                                ))
+                        
+                        }  
                                 
+                              
                         </TransitionGroup>
                                 </div>
                             

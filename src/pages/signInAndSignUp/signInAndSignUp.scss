@@ -1,6 +1,20 @@
 .sign-in-and-sign-up {
-    width: 850px;
+    width:100%;
     display: flex;
     justify-content: space-between;
-    margin: 30px auto;
+    // margin: 30px auto;
+   
+    overflow: hidden;
+    padding: 200px 20px;
+    background-color: rgb(214, 201, 228);
+
+}
+@media (max-width: 600px){
+    .sign-in-and-sign-up {
+        padding: 200px 20px;
+
+       display: block;
+      
+   
+    }
 }

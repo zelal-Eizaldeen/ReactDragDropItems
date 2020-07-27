@@ -1,31 +1,40 @@
 import React from 'react';
-import {SortableContainer} from 'react-sortable-hoc';
 
 import DraggableIconBox from './DraggableIconBox';
 
 
 
-const  DraggableIconList = SortableContainer(({icons}) => {
-console.log(icons, "icon")
-    return(
-        <div style={{height: "100%"}}>
-        {icons.map((icon, i) => (
+const  DraggableIconList = (props) => {
 
-            <DraggableIconBox      
-            icons={icon}  
-            index={i}
-          
-            />
+    
+        const {icons, removeIcon, addNewPosition, open, floor} = props;
+        
+        return(  
+                <div  style={{height: "100%",   overflow: "hidden",backgroundColor:"#eee"}}>
+                 {icons.map((icon, i)=> (
+                 <DraggableIconBox
+                 key={i}
+                  index={i}
+                  keyId={icon.id} 
+                  name={icon.name}
+                  handleClick={()=> removeIcon(icon.icon)} 
+                  icon={icon.icon} 
+                  addNewPosition={addNewPosition}
+                  open={open}
+                 icons={icons}
+                 floor={floor}
+              
+                
+                  
+    
+                  />
+                ))} 
 
-    ))}
-        </div>
+                </div>
            
-            
-         
-    );
-});
-
-
-
+        
+      );
+    }
 
 export default DraggableIconList;
+

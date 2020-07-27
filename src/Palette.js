@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
-import IconBox from './IconBox';
-import Navbar from './Navbar';
-import PaletteFooter from './PaletteFooter';
+import {withRouter} from 'react-router-dom';
+
+import FloorLists from './FloorLists';
 
 
 import "./Palette.css";
-export default class Palette extends Component {
+ class Palette extends Component {
     constructor(props){
         super(props);
         this.state = {
@@ -14,52 +14,41 @@ export default class Palette extends Component {
             floor: this.props.floorUrl
            
         };
-        this.changeWidth = this.changeWidth.bind(this);
-        this.changeHeight = this.changeHeight.bind(this);
-        this.changeFloor = this.changeFloor.bind(this);
-    }
+        this.deleteDesignByFloor = this.deleteDesignByFloor.bind(this);
+        this.goToFloor = this.goToFloor.bind(this);
 
-    changeWidth(width) {
-      
-        this.setState({ width });
     }
-    changeHeight(height) {
-      
-        this.setState({ height });
+    
+    deleteDesignByFloor(userId,floorId){
+        this.props.deleteDesignByFloor(userId,floorId);
     }
+    goToFloor(design, id,floor){
+        this.props.onFloorSelect(design)
+        this.props.history.push(`/design/${id}/${floor}`);
+     }
   
-    changeFloor(val){
-        this.setState({ floor: val})
-    }
-  
-    render() {
-        const {floorUrl} = this.props;
-        const {paletteName, homeItems, id} = this.props.palette;
-        const {width, height} = this.state;
-        
-    //    const floorItems = palette.homeItems.filter(homeItem => homeItem.floor === floor);
-        const iconBoxes = homeItems.map(homeItem => (
-         <IconBox 
-              key={homeItem.id}
-              name={homeItem.name} 
-              icon={homeItem.icon}
-              backgroundImage={`url(${homeItem.url})`} 
-              width={width}
-              height={height}
-              changeWidth={this.changeWidth}
-              changeHeight={this.changeHeight}
-              moreUrl={`/palette/${id}/${homeItem.id}`}
+    render() {  
+        const iconBoxes = this.props.fetchDesignsById.map(design => (
+         <FloorLists
+             key={design.id}
+             id={design.id}
+            onFloorSelect={this.props.onFloorSelect}
+            design={design}
+            handleClick={()=> this.goToFloor(design, design.design.id, design.design.floor)} 
+            deleteDesignByFloor={this.deleteDesignByFloor}  
+           
          />
-        ));
-
+         ));
 
         return (
-            <div className="Palette">
-              <Navbar  floorUrl={floorUrl} handleChange={this.changeFloor} />
-                <div className="Palette-icons">{iconBoxes}    
-                </div>
-              <PaletteFooter paletteName={paletteName}/>
+          
+                <div className="Palette" > 
+                {iconBoxes}    
+           
+            
             </div>
         )
     }
 }
+
+export default withRouter(Palette);

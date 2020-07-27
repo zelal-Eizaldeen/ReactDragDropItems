@@ -1,20 +1,25 @@
-import React, {useState, useEffect} from 'react';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
+import React, {useState} from 'react';
+import {storage} from './firebase/firebase.utils';
+
+import {Helmet} from 'react-helmet';
+
+import { makeStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import classNames from "classnames";
 import PaletteFormNav from './PaletteFormNav';
-import ColorPickerForm from './ColorPickerForm';
 import Button from "@material-ui/core/Button";
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import DraggableIconList from './DraggableIconList';
-import { arrayMove } from 'react-sortable-hoc';
 import {DRAWER_WIDTH} from './constants';
+import DraggableIconList from './DraggableIconList';
 
-
-
+import IconPickerForm from './IconPickerForm';
+ import axios from './axios-designs';
+import sizes from './styles/sizes';
+import FileUpload from './components/FileUpload/FileUpload';
+import { useHttpClient } from './shared/hooks/http-hook';
 
 
 const drawerWidth = DRAWER_WIDTH;
@@ -23,28 +28,39 @@ const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
   },
-  
-  
   drawer: {
     width: drawerWidth,
     flexShrink: 0,
+    [sizes.down("xs")]: {
+      width: "0px",
+     
+   },
   },
   drawerPaper: {
+  //Here the items
     width: drawerWidth,
     display: "flex",
-    alignItems: "center"
+    alignItems: "center",
+    overflowY: "auto",
+    [sizes.down("xs")]: {
+      width: "30%",  
+   }, 
   },
   drawerHeader: {
-    display: 'flex',
+   display: 'flex',
     alignItems: 'center',
     width: "100%",
-    padding: theme.spacing(0, 1),
+     padding: theme.spacing(0, 1),
     // necessary for content to be below app bar
     ...theme.mixins.toolbar,
-    justifyContent: 'flex-end',
+     justifyContent: 'flex-end',
+    fontSize: "20rem",
+   
   },
   content: {
+   //Where I am Drawing..
     flexGrow: 1,
+    // overflow: 'hidden',
     height: "calc(100vh - 64px)",
     padding: 0,
     transition: theme.transitions.create('margin', {
@@ -52,8 +68,15 @@ const useStyles = makeStyles((theme) => ({
       duration: theme.transitions.duration.leavingScreen,
     }),
     marginLeft: -drawerWidth,
+    [sizes.down("xs")]: {
+      marginLeft: 0,
+     
+   },
+
+   
   },
   contentShift: {
+    // overflow: 'hidden',
     transition: theme.transitions.create('margin', {
       easing: theme.transitions.easing.easeOut,
       duration: theme.transitions.duration.enteringScreen,
@@ -62,45 +85,58 @@ const useStyles = makeStyles((theme) => ({
   },
   container: {
    width: "90%",
-   height: "100%",
+   height: "20%",
    display: "flex",
    flexDirection: "column",
    justifyContent: "center",
    alignItems: "center",
-   marginTop: "70px"
-
-   
+   marginTop: "260px",
+  
+  
   },
   buttons: {
-width: "100%"
+width: "100%",
   },
   button: {
-width: "50%"
+width: "100%",
+marginTop: "4%",
+
+marginBottom: "10%"
+
+  },
+  textNo: { 
+    width: "30%", 
+    margin: "40% 30%",
+    alignItems: "center",
+    fontSize: "16px",
+    textAlign: "center"    
   }
+
 }));
 
 
 export default function NewPaletteForm(props) {
+  NewPaletteForm.defaultProps  = {
+    maxIcons: 100
+  };
     const classes = useStyles();
-    const theme = useTheme();
-    const [open, setOpen] = React.useState(false);
-    // const [newPaletteName, setNewPaletteName] = useState('');
-  // const [newColorName, setNewColorName] = useState('');
-   const [colors, setColors] = useState([{color: 'blue', name: 'blue'}]);
-  // const [colors, setColors] = useState([props.palettes[0].homeItems]);
-    const [name, setName] = useState({
-        colorName: "",
-        paletteName: ""
-      });
+    const { isLoading, error, sendRequest, clearError } = useHttpClient();
+
+    const [open, setOpen] = React.useState(true);
+    const [icons, setIcons] = useState([])
+    const [iconsMoved, setIconsMoved] = useState([]);
+    const [floor, setFloor] = useState("Basement");
+    const [file, setFile] = useState();
+
+    // const handleCurrentUser = () => {
+    //     switch (props.currentUser) {
+    //       case null:  return;
+    //        default: return props.currentUser.displayName;
+            
+    //     }
+    //   }
   
-    const icons = [
-        {name: 'fas fa-tv'},
-        {name: 'fas fa-bath'},
-        {name: 'fas fa-bed'}
-    ]
-
-   const [iconName, setIconName] = useState([])
-
+  
     const handleDrawerOpen = () => {
       setOpen(true);
     };
@@ -109,91 +145,76 @@ export default function NewPaletteForm(props) {
       setOpen(false);
     };
   
-   
-   
-    const removeColor = (colorName) => {
-        setColors(colors.filter(color=> color.name !== colorName))
+    const addNewIcon = (newIcon) => { 
+        setIcons(
+          [...icons, newIcon])
     }
-    const addNewColor = (newColor) =>  {
-        setColors([...colors, newColor], 
-           // setNewColorName("")
-
-        )
-      
+    const removeIcon = (iconName) => {
+        setIcons(icons.filter(icon => icon.icon !== iconName))
     }
+    const clearIcons = () => {
+      setIcons([])
+  }   
+  const addNewPosition = (newPosition) => {
+       setIconsMoved(
+       [...iconsMoved, newPosition])
+     
+  }
 
-    const addNewIcon = (newIcon) =>{
-      setIconName([...iconName, newIcon]
-    
-   
-      )}
-
-    const handleChange = (e) => {
-     setName({ ...name, [e.target.name]: e.target.value });
-    }
-    const handleSubmit = (newPaletteName) => {
-        const newPalette = {
-            paletteName: newPaletteName, 
-            id: newPaletteName.toLowerCase().replace(/ /g, "-"),
-            homeItems: colors
-        }
-        
-        props.savePalette(newPalette)
-        props.history.push("/")
-    }
-    const onSortEnd = ({oldIndex, newIndex }) => {
-        setIconName (arrayMove(iconName, oldIndex, newIndex)
-
-        )
-    }
-
-
-const clearColors = () => {
-    setColors([])
-}   
-
-const addRandomColor = () => {
-    const allColors = props.palettes.map(p => p.homeItems).flat();
-    var rand = Math.floor(Math.random() * allColors.length);
-    const randomColor = allColors[rand];
-    setColors([...colors, randomColor]);
-
+const saveDesignWithFloor = (newDesign) => {
+ setFloor(newDesign.floor)
 }
 
-const iconItems = icons.map(icon => (
-  <div>
-      <i  className={icon.name}
-       onClick={()=> {addNewIcon(icon.name)}} 
-      ></i>
+const onInput = (id,pickedFile, isValid) => {
+  setFile(pickedFile)
+
+}
+    const handleSubmitDesign = async () => {
+      const metadata = {
+        contentType: 'image/jpeg',
+      };
+      
+      const storageRef = storage.ref();
+      const imagesRef = storageRef.child(`images/${file.name}`); 
+      imagesRef.put(file, metadata).then(function(snapshot) {
+        console.log('Uploaded a blob or file!');
+      });
+     
+      const newDesign = {
+        id:   props.userId,
+        userId: props.userId,
+        paletteName:   props.email,
+        email: props.email,
+        floor: floor,
+        fileName: file.name,
+        homeItems: icons,
+       }
     
-  </div>
-))
-    // useEffect(() => {
-    
-    //     ValidatorForm.addValidationRule("isColorNameUnique", value => {
-    //         return colors.every(
-    //           ({ name }) => name.toLowerCase() !== value.toLowerCase()
-    //         );
-    //       });
-    //       ValidatorForm.addValidationRule("isColorUnique", value => {
-    //           return colors.every(
-    //             ({ color }) => color !== currentColor
-    //           );
-    //         });
-       
-        
-    //   });
+       axios.post(`/designs/${props.userId}.json?auth=${props.token}`, newDesign)
 
-      const paletteIsFull = colors.length >= 20;
-
-
+      .then(response => {
+      })
+      alert(' تم الإرسال بنجاح')
+     }
+     
       return (
         <div className={classes.root}>
+        
+        <Helmet>
+     <title>مقاولات عامة واستشارات هندسية - constructions - مقاولات عامة الكويت - مقاول بناء</title>
+        <meta name="description" content="مقاول بناء 
+        شركة مقاولات ٦٥٦٦٦٦٤٩ اضافة ادوار و توسعات . شاليهات 
+         ديوانية . ملاحق . ترميمات . قسائم صناعية وتجارية 
+         تشطيب على المفتاح من التصميم للتسليم
+         المخطط والرخصة
+" />
+   </Helmet>
           <PaletteFormNav
             open={open}
-            palettes={props.palettes}
-            handleSubmit={handleSubmit}
             handleDrawerOpen={handleDrawerOpen}
+            handleSubmitDesign={handleSubmitDesign}
+            floor={floor}
+            saveDesignWithFloor={saveDesignWithFloor}
           />
           <Drawer
             className={classes.drawer}
@@ -212,37 +233,24 @@ const iconItems = icons.map(icon => (
           <Divider />
           <div className={classes.container}>
             <Typography variant='h4' gutterBottom>
-              Design Your Palette
+            
             </Typography>
             <div className={classes.buttons}>
               <Button
                 variant='contained'
                 color='secondary'
-                onClick={clearColors}
+                onClick={clearIcons}
                 className={classes.button}
               >
-                Clear Palette
+                Clear 
               </Button>
-              <Button
-                variant='contained'
-                className={classes.button}
-                color='primary'
-                onClick={addRandomColor}
-                disabled={paletteIsFull}
-              >
-                Random Color
-              </Button>
-            </div>
-
-                                
-            {/* <ColorPickerForm
-              paletteIsFull={paletteIsFull}
-              addNewColor={addNewColor}
-              colors={colors}
-             
-            /> */}
-       {iconItems}
-             
+           
+            </div>                     
+            <IconPickerForm
+              addNewIcon={addNewIcon}
+              handleDrawerOpen={handleDrawerOpen}
+              
+            /> 
           </div>
         </Drawer>
         <main
@@ -250,22 +258,20 @@ const iconItems = icons.map(icon => (
             [classes.contentShift]: open
           })}
         >
-          <div className={classes.drawerHeader} />
-          <DraggableIconList 
-                icons={iconName}
-                axis='xy'
-                onSortEnd={onSortEnd}
-                distance={20}
-               
-                />
-          {/* <DraggableColorList
-        
-            colors={colors}
-            removeColor={removeColor}
-            axis='xy'
-            onSortEnd={onSortEnd}
-            distance={20}
-          /> */}
+       
+      {icons.length > 0 ? (
+        <DraggableIconList 
+          icons={icons}
+         removeIcon={removeIcon}
+         addNewPosition={addNewPosition}
+         open={open}
+         floor={floor}
+      />
+       )
+        : <p className={classes.textNo}>Choose Your Home Room by Clicking on it</p>
+        }
+          <FileUpload id="image" center onInput={onInput}/>
         </main>
+       
       </div> );
 }

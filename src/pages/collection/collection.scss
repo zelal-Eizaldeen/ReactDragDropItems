@@ -9,11 +9,27 @@
   
     .items {
       display: grid;
-      grid-template-columns: 1fr 1fr 1fr 1fr;
+       grid-template-columns: 1fr 1fr 1fr 1fr;
       grid-gap: 10px;
-  
+      @media (max-width: 500px){
+        display: block;  
+      }
       & .collection-item {
         margin-bottom: 30px;
+
+        &:hover {
+          cursor: pointer;
+          // transform: scale(2);
+          // transition: transform 6s cubic-bezier(0.25, 0.45, 0.45, 0.95);
+        
+        }
+
+
+
       }
     }
   }
+
+  
+ 
+   
