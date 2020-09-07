@@ -1,0 +1,220 @@
+/* Trees Image - Pexels: https://www.pexels.com/photo/photo-of-trees-in-forest-3801030/ */
+@import url("https://fonts.googleapis.com/css?family=Quicksand&display=swap");
+
+html {
+  box-sizing: border-box;
+}
+
+:root {
+  --column-1: #a2622d;
+  --column-2: #1b6161;
+  --column-3: #248224;
+  --column-4: #a22d22;
+}
+
+body {
+  margin: 0;
+ 
+  font-family: Quicksand, sans-serif;
+ 
+}
+
+table {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+ 
+}
+a {
+  text-decoration: none;
+  color: whitesmoke;
+  
+}
+.priceBtn {
+    min-width: 165px;
+    width: auto;
+     height: 50px;
+     line-height: 50px;
+     font-size: 20px;
+     background-color: black;
+     color: white;
+     font-weight: bolder;
+     border: none;
+     border-radius: 10px;
+     cursor: pointer;
+     position: absolute;
+     top: 50%;
+     left: 40%;
+   
+}
+
+h1 {
+ 
+  text-shadow: 2px 2px 5px black;
+}
+
+.container {  
+  height: 60vh;
+  width: 100vw;
+  background-size: cover;
+
+
+}
+
+.trDirection {
+  width: 100%;
+  display: flex; 
+  flex-direction: row-reverse;
+}
+
+
+/* Columns */
+.drag-column {
+  flex: 1;
+  margin: 0 10px;
+  position: relative;
+  background-color: rgba(0, 0, 0, 0.4);
+  color: white;
+  
+  
+ 
+font-size: 16px;
+  border-radius: 10px;
+  overflow-x: hidden;
+  animation: 1s slidefade 1s forwards;
+  
+}
+
+.backlog-column {
+
+  background-color: var(--column-1);
+}
+
+
+ .progress-column {
+  background-color: var(--column-2);
+}
+
+.complete-column {
+  background-color: var(--column-3);
+}
+
+.on-hold-column {
+  background-color: var(--column-4);
+}
+
+.drag-item {
+  text-align: center;
+  flex: 1;
+  margin: 20px;
+ padding: 20px;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: whitesmoke;
+  border-radius: 10px;
+  line-height: 1.5rem;
+  /* letter-spacing: 1px; */
+  cursor: pointer;
+  font-size: 18px;
+}
+.priceLight {
+  background-color: rgba(201, 140, 140, 0.8);
+
+}
+.priceMid {
+  background-color: rgba(161, 68, 68, 0.8);
+
+}
+.priceHigh {
+  background-color: rgba(243, 7, 7, 0.8);
+
+}
+
+.drag-item:focus {
+  outline: none;
+  background-color: white;
+  color: black;
+}
+/* Slide in animation */
+.slide-in-1 {
+  animation: slide-in 0.4s linear 0.2s both;
+
+}
+.slide-in-2 {
+  animation: slide-in 0.4s linear 0.4s both;
+  
+}
+.slide-in-3 {
+  animation: slide-in 0.4s linear 0.6s both;
+  
+}
+.slide-in-4 {
+  animation: slide-in 0.4s linear 0.8s both;
+  
+}
+.slide-in-5 {
+  animation: slide-in 0.4s linear 1s both;
+  
+}
+
+/* Slide out animation */
+.slide-out-1 {
+  animation: slide-out 0.3s linear 0.5s both;
+
+}
+.slide-out-2 {
+  animation: slide-out 0.3s linear 0.4s both;
+  
+}
+.slide-out-3 {
+  animation: slide-out 0.3s linear 0.3s both;
+  
+}
+.slide-out-4 {
+  animation: slide-out 0.3s linear 0.2s both;
+  
+}
+.slide-out-5 {
+  animation: slide-out 0.3s linear 0.1s both;
+  
+}
+@keyframes slidefade {
+  100% {
+    opacity: 1;
+    margin: 0;
+
+  }
+}
+/* Media Query: Laptop */
+@media screen and (max-width: 1800px) {
+  .main-title {
+    font-size: 2rem;
+  }
+}
+
+/* Media Query: Large Smartphone (Vertical) */
+@media screen and (max-width: 600px) {
+  body {
+    overflow-y: auto;
+  }
+
+  button {
+    position: absolute;
+    left: 30%;
+    top: 30%;
+    width: 100px;
+    height: 50px;
+   
+  }
+
+.container{
+  width: 100vw;
+  height: 60vh;
+}
+.drag-item {
+  padding: 0px;
+  margin: 10px;
+  height: 125px;
+ 
+}
+}

@@ -8,5 +8,10 @@
 <url> <loc>https://www.narcokw.com/design/new</loc> </url>
 <url> <loc>https://www.narcokw.com/design/:id</loc> </url>
 <url> <loc>https://www.narcokw.com/designs</loc> </url>
+<url> <loc>https://www.narcokw.com/prices</loc> </url>
+<url> <loc>https://www.narcokw.com/search</loc> </url>
+<url> <loc>https://www.narcokw.com/contact-us</loc> </url>
+<url> <loc>https://www.narcokw.com/constructions</loc> </url>
+<url> <loc>https://www.narcokw.com/interior</loc> </url>
 <url> <loc>https://www.narcokw.com/design/:designId/:floorId</loc> </url>
 </urlset>

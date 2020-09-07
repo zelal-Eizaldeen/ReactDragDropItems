@@ -9,6 +9,7 @@ html {
   color: #555;
 }
 body {
+  
   /* padding: 20px 40px; */
   /* padding: 100px 80px; */
 
@@ -26,10 +27,13 @@ nav {
 a {
 	text-decoration: none;
 	opacity: 0.75;
-  color: #fff;
+  color: white;
   font-weight: bold;
 }
 
+h3, p, h4 {
+  color: black;
+}
 a:hover {
 	opacity: 1;
 }

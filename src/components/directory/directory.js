@@ -1,6 +1,4 @@
 import React from 'react';
-import Button from '@material-ui/core/Button';
-
 import {createStructuredSelector} from 'reselect';
 import {Helmet} from "react-helmet";
 
@@ -10,9 +8,12 @@ import MenuItem from '../menuItem/menuItem';
 import {connect} from 'react-redux';
 import {selectDirectorySections} from '../../redux/directory/directory.selectors'
 import './directory.scss';
-import homeImage from '../../assests/images/homeImage.jpg';
+import bg from '../../assests/images/bg.svg';
+
+
 import PaletteFooter from '../../PaletteFooter';
 import Spinner from '../UI/Spinner';
+import CustomButton from '../customButton/customButton';
 const  Directory = ({sections, isLoading}) => {
  
   let projects = (
@@ -33,29 +34,34 @@ if(isLoading){
   
   <div className="root"> 
    <Helmet>
-     <title>مقاولات عامة واستشارات هندسية</title>
+     <title>مترا للحلول الهندسية</title>
         <meta name="description" content="مقاولات الكويت إبداع في التصميم الهندسي والبناء بأفضل جودة" />
    </Helmet>
+   
      <section className="hero">
-    <div className="background-image" style={{backgroundImage: `url(${homeImage})`}}></div>
-    <div className="hero-content-area">
-      <h1>  ناركو للاستشارات الهندسية</h1>
-      <h3>استمتع برحلة بناء بيتك معنا  </h3>
+    <div className="background-image" style={{backgroundImage: `url(${bg})`}}></div> 
+  
+            <div className="hero-content-area">
+      <h1>  مترا للحلول الهندسية</h1>
+      <h3>    حلول هندسية بلا حدود  </h3>
+      <h4>ستحصل على حلول هندسية ذكية، وخدمات إنشائية ذات جودة عالية، نستطيع جعل حلمك حقيقة</h4>
       {/* <Link to='tel:0096565666649'> */}
       <a href="tel:65666649">
-     <Button  className="btn" variant="contained" color='secondary'>اتصل بنا</Button>
+     <CustomButton >اتصل بنا </CustomButton> 
+     
+
+    {/* <Button  className="btn" variant="contained" color='scondary'>اتصل بنا</Button> */}
      </a>
   {/* </Link>      */}
     </div>
+   
     </section>
     <section class="destinations">
     <h3 class="title">بعض مشاريعنا</h3>
-    <p>            شركة ناركو للاستشارات الهندسية والمقاولات العامة. نعلم أنك مشغول دائما. لا يوجد لديك وقت كافٍ
+    <p>            شركة مترا للاستشارات الهندسية  . نعلم أنك مشغول دائما. لا يوجد لديك وقت كافٍ
     لبناء منزل حديث بواجهات عصرية ومساحات مريحة ضمن ميزانيتك المحدودة. لذا دعنا نهتم بذلك لك. فريقنا من المهندسيين المعماريين والإنشائيين ممتاز في ذلك. نعدك بذلك
-
-
 </p>
-    <hr />
+   <hr />
     </section>
 
   {projects}
@@ -89,15 +95,14 @@ if(isLoading){
       </li>
     </ul>
     <Link to='/design/new'>
-     <Button  className="btn" variant="contained" color='secondary'>صمم بيتك</Button>
+    <CustomButton >  صمم بيتك  </CustomButton>   
   </Link>     
   </section>
-
   <section class="contact">
     <h3 class="title">من نحن </h3>
     <p> هل تريد بناء منزل العمر؟ هل تريد تصميم بأفضل جودة والمزيد من المعلومات اتصل بنا</p>
     <Link to='/contactus'>
-     <Button  className="btn" variant="contained" color='secondary'> استشر مهندسنا</Button>
+    <CustomButton > استشر مهندسنا </CustomButton>   
   </Link>   
   
   </section>

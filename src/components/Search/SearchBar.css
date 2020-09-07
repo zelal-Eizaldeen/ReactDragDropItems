@@ -1,7 +1,12 @@
+.rootSearch {
+background: linear-gradient(to right, #ACB6E5, #74ebd5); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+}
+
 .search {
+    height: 100%;
     display: flex;
     flex-direction: column;
     padding: 150px 80px;
-    background-color: rgb(215, 212, 218);
 
 }

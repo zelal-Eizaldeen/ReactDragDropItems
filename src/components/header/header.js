@@ -26,7 +26,13 @@ import './header.scss';
           <Link className='option' to= './signin'> تسجيل الدخول</Link>
 
        } 
-       
+      
+      <Link className='option' to='/prices'>
+      أسعار البناء
+      </Link>
+      <Link className='option' to='/contact-us'>
+      أين نحن؟
+      </Link>
       <Link className='option' to='/projects'>
        مشاريعنا
       </Link>

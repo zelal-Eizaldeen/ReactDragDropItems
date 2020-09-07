@@ -8,7 +8,7 @@ const CollectionItem = ({ item }) => {
   return (
     <div className='collection-item'>
        <Helmet>
-     <title>مقاولات عامة واستشارات هندسية</title>
+     <title>   مترا للحلول الهندسية</title>
         <meta name="description" content="مقاولات الكويت إبداع في التصميم الهندسي والبناء بأفضل جودة" />
    </Helmet>
       <div

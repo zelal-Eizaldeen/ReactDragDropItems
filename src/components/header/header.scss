@@ -4,7 +4,6 @@
      width: 100%;
     display: flex;
      justify-content: space-between;
-    // margin-bottom: 25px;
     
     animation: 1s fadein 0.5s forwards;
     opacity: 0;
@@ -27,6 +26,7 @@
   // }
   
 }
+
     .logo-container {
       // height: 60%;
       // width: 8%;
@@ -54,7 +54,7 @@
    
   
     .options {
-     
+     color: green;
       // width: 50%;
       // height: 100%;
       display: flex;

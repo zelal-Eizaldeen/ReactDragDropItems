@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 import {Helmet} from 'react-helmet';
 import './PaletteFooter.css';
 function PaletteFooter(props){
@@ -7,7 +8,7 @@ function PaletteFooter(props){
 
     <footer className="footer">
     <Helmet>
-     <title>مقاولات عامة واستشارات هندسية - constructions - مقاولات عامة الكويت - مقاول بناء</title>
+     <title>استشارات وحلول هندسية </title>
         <meta name="description" content="مقاول بناء 
         شركة مقاولات ٦٥٦٦٦٦٤٩ اضافة ادوار و توسعات . شاليهات 
          ديوانية . ملاحق . ترميمات . قسائم صناعية وتجارية 
@@ -15,11 +16,13 @@ function PaletteFooter(props){
          المخطط والرخصة
 " />
    </Helmet>
-    <p>Narco@copy right 2020</p>
+    <p>Metra@copy right 2020</p>
   
     <ul>
       <li><a href="https://www.instagram.com/metra_eng_sol/"><i class="fab fa-instagram"></i> follow us in instgram</a></li>
-     
+       <li>  <Link className='option' to='/search'>
+      ابحث
+      </Link></li>
     </ul>
 </footer>
    )

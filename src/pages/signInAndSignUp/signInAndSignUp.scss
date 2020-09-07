@@ -6,7 +6,7 @@
    
     overflow: hidden;
     padding: 200px 20px;
-    background-color: rgb(214, 201, 228);
+    background: linear-gradient(to right, #ACB6E5, #74ebd5); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
 }
 @media (max-width: 600px){

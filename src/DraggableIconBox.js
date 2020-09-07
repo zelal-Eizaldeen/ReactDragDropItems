@@ -97,7 +97,7 @@ class   DraggableIconBox extends Component {
         return (
      <div> 
 <Helmet>
-     <title>مقاولات عامة واستشارات هندسية - تصميم أونلاين - مقاولات عامة الكويت - مقاول بناء</title>
+     <title>   استشارات هندسية - تصميم أونلاين</title>
         <meta name="description" content="مقاول بناء 
         شركة مقاولات ٦٥٦٦٦٦٤٩ اضافة ادوار و توسعات . شاليهات 
          ديوانية . ملاحق . ترميمات . قسائم صناعية وتجارية 

@@ -126,7 +126,7 @@ export default function NewPaletteForm(props) {
     const [icons, setIcons] = useState([])
     const [iconsMoved, setIconsMoved] = useState([]);
     const [floor, setFloor] = useState("Basement");
-    const [file, setFile] = useState();
+    const [file, setFile] = useState('');
 
     // const handleCurrentUser = () => {
     //     switch (props.currentUser) {
@@ -174,12 +174,13 @@ const onInput = (id,pickedFile, isValid) => {
         contentType: 'image/jpeg',
       };
       
+      if(file){
       const storageRef = storage.ref();
       const imagesRef = storageRef.child(`images/${file.name}`); 
       imagesRef.put(file, metadata).then(function(snapshot) {
         console.log('Uploaded a blob or file!');
       });
-     
+    }
       const newDesign = {
         id:   props.userId,
         userId: props.userId,
@@ -201,7 +202,7 @@ const onInput = (id,pickedFile, isValid) => {
         <div className={classes.root}>
         
         <Helmet>
-     <title>مقاولات عامة واستشارات هندسية - constructions - مقاولات عامة الكويت - مقاول بناء</title>
+     <title>استشارات هندسية - صمم بيتك</title>
         <meta name="description" content="مقاول بناء 
         شركة مقاولات ٦٥٦٦٦٦٤٩ اضافة ادوار و توسعات . شاليهات 
          ديوانية . ملاحق . ترميمات . قسائم صناعية وتجارية 

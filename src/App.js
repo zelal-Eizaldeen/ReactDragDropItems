@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import {Route, Switch, Redirect} from 'react-router-dom';
 import {Helmet} from 'react-helmet';
 import axios from './axios-designs';
+import unsplash from './api/unsplash';
+
 import {connect} from 'react-redux';
 import Palette from './Palette';
 import PaletteList from './PaletteList';
@@ -19,6 +21,13 @@ import {selectCollectionsForPreview} from './redux/project/project.selectors';
 import './App.css';
 import SingleDesign from './SingleDesign';
 import SearchBar from './components/Search/SearchBar';
+import ContactUs from './components/ContactUs/ContactUs';
+import Projects from './containers/projects/Projects';
+import Constructions from './containers/projects/Constructions';
+import Interior from './containers/projects/Interior';
+import Prices from './components/Prices/Prices';
+
+
 
 
 class App extends Component {
@@ -38,9 +47,7 @@ class App extends Component {
       userId: null,
       expirationTime: null,
       error: null,
-    
-    
-     
+      searchResults: [] 
     };
   }
   unSubscribeFromAuth = null;
@@ -50,19 +57,10 @@ class App extends Component {
     this.setState({ selectedFloor: design})
   }
 
-  componentDidUpdate(){
-    console.dir(this.state.currentUser)
-    console.log(this.state.email)
-
-  }
   componentDidMount(){
     this.checkAuthTimeExp();
     this.unSubscribeFromAuth  = auth.onAuthStateChanged( async userAuth => {
        if(userAuth) {
-      //  const token =  userAuth.getIdToken().then(function(accessToken) {
-       
-// console.log(accessToken)
-//   })
               userAuth.getIdToken().then(
               idToken=> {
                
@@ -80,8 +78,6 @@ class App extends Component {
                     id:snapShot.id,
                     ...snapShot.data()
                    }, 
-                 
-
                  });
                 
                })
@@ -99,8 +95,6 @@ class App extends Component {
   }
  
   fetchDesigns = async () => {
-   
-    // if (id) {
   this.setState({loading: true})
     const response = await axios.get(`/designs.json`)
         {
@@ -117,10 +111,8 @@ class App extends Component {
         this.setState({ fetchDesigns: fetchDesigns, loading: false})
 
     }
- // }
 }
-   findDesign = async (id) => {
-   
+   findDesign = async (id) => { 
     if (id) {
 
        const designID =  this.state.fetchDesignsById.find(design=> design.design.id ===id)
@@ -192,12 +184,18 @@ checkAuthTimeExp =  () => {
     }
   }
 }
- 
+  onSearchSubmit = async (term) => { 
+   const response = await unsplash.get('/search/photos', {
+     params: {query: term},
+    
+   })
+   this.setState({ searchResults: response.data.results})
+ }
   render() {
   return (
     <div>
  <Helmet>
-     <title>مقاولات عامة واستشارات هندسية - تصاميم حديثة - مقاول بناء</title>
+     <title>مترا للحلول الهندسية</title>
         <meta name="description" content="مقاول بناء 
         شركة مقاولات ٦٥٦٦٦٦٤٩ اضافة ادوار و توسعات . شاليهات 
          ديوانية . ملاحق . ترميمات . قسائم صناعية وتجارية 
@@ -226,9 +224,19 @@ checkAuthTimeExp =  () => {
                   <Route  
                     exact 
                     path='/projects/:collectionId' 
-                    component={CollectionPage}
+                    component={Projects}
                   />
-
+      
+                   <Route  
+                    exact 
+                    path='/interior' 
+                    component={Interior}
+                  />
+                   <Route  
+                    exact 
+                    path='/constructions' 
+                    component={Constructions}
+                  />
                   <Route exact path="/signin"
                   render={(routeProps)=>     
  
@@ -291,15 +299,10 @@ checkAuthTimeExp =  () => {
                       loading={this.state.loading}
                         />  )
                         : <p style={{backgroundColor: "red", color: "white", fontSize: "40px", fontWeight: "bold", padding: "300px", textAlign: "center"}}> غير مصرح بالدخول</p>
-                
-                        
-                       }
-          
-                         
-              /> 
-              
-                
-                            <Route  
+
+                       }               
+              />              
+             <Route  
                     exact 
                     path='/design/:designId/:floorId'
                     render={routeProps => (
@@ -307,13 +310,30 @@ checkAuthTimeExp =  () => {
                         fetchDesignsById={this.state.fetchDesignsById}
                         floorId={routeProps.match.params.floorId}
                         design={this.state.selectedFloor}
-
-                        // findDesign={this.findDesign}
                       />
                     )}
                   />
-                  <Route exact  path='/search'  component={SearchBar} />
+                  <Route exact  path='/search' render={routeProps => 
+                  (
+                      <SearchBar
+                       onSubmit={this.onSearchSubmit}
+                       results={this.state.searchResults}
+                      />
+                    )}
+                  />
+                   <Route exact  path='/contact-us' render={routeProps => 
+                  (
+                      <ContactUs   {...routeProps} />
+                    )}
+                  />
 
+<Route exact  path='/prices' render={routeProps => 
+                  (
+                      <Prices   {...routeProps} />
+                    )}
+                  />
+                
+               
                     <Redirect to='/' />
 
                   </Switch>

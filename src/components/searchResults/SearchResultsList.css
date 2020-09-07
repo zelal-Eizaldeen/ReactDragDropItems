@@ -1,0 +1,32 @@
+.result-list {
+
+    /* width: 100%; */
+    display: flex;
+    /* flex-direction: column; */
+    flex-wrap: wrap;
+    height: 250px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.result-list img {
+    border: solid 2px rgb(192, 199, 192);
+    width: 40%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    margin-bottom: 30px;
+    margin-right: 30px;
+    margin-top: 30px;
+    margin-left: 30px;
+   
+  
+}
+
+
+@media (max-width: 800px) {
+    .result-list img {
+      width: 80%;
+    }
+}
+  

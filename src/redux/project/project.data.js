@@ -121,7 +121,7 @@ const PROJECT_DATA = {
       ]
     },
         towers: {
-          id: 3,
+          id: 2,
           title: 'مقاولات أبراج',
           routeName: 'jackets',
           items: [
@@ -136,7 +136,7 @@ const PROJECT_DATA = {
       ]
     },
     plans: {
-      id: 3,
+      id: 6,
       title: 'مخططات',
       routeName: 'jackets',
       items: [
@@ -169,7 +169,7 @@ const PROJECT_DATA = {
   ]
 },
 industrial: {
-  id: 3,
+  id: 4,
   title: 'مقاولات تجارية',
   routeName: 'jackets',
   items: [
