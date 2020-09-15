@@ -15,7 +15,6 @@ import SignInAndSignUp from './pages/signInAndSignUp/SignInAndSignUp';
 import Header from './components/header/header';
 import Directory from './components/directory/directory';
 import ProjectPage from './pages/project/project';
-import CollectionPage from './pages/collection/collection';
 import {setCurrentUser} from './redux/user/user.actions';
 import {selectCollectionsForPreview} from './redux/project/project.selectors';
 import './App.css';
@@ -195,7 +194,7 @@ checkAuthTimeExp =  () => {
   return (
     <div>
  <Helmet>
-     <title>مترا للحلول الهندسية</title>
+     <title>استشارات هندسية الكويت</title>
         <meta name="description" content="مقاول بناء 
         شركة مقاولات ٦٥٦٦٦٦٤٩ اضافة ادوار و توسعات . شاليهات 
          ديوانية . ملاحق . ترميمات . قسائم صناعية وتجارية 

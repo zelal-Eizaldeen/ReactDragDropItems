@@ -13,7 +13,7 @@ const  DraggableIconList = (props) => {
                 <div  style={{height: "100%",   overflow: "hidden",backgroundColor:"#eee"}}>
                  {icons.map((icon, i)=> (
                  <DraggableIconBox
-                 key={i}
+                  key={i}
                   index={i}
                   keyId={icon.id} 
                   name={icon.name}

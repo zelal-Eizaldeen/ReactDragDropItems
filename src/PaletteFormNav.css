@@ -1,0 +1,26 @@
+
+  .place-item__info  {
+  text-align: center;
+  font-size: 18px;
+  }
+  
+  .place-item__actions {
+    padding: 1rem;
+    text-align: center;
+    border-top: 1px solid #ccc;
+  }
+  
+  
+  .place-item__actions button,
+  .place-item__actions a {
+    margin: 0.5rem;
+  }
+  
+  @media (max-width: 600px) {
+    .place-item__actions button{
+        padding: 5px;
+    } 
+    .place-item__info{
+        font-size: 14px;
+    }
+  }

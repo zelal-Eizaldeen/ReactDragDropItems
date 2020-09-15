@@ -34,7 +34,7 @@ if(isLoading){
   
   <div className="root"> 
    <Helmet>
-     <title>مترا للحلول الهندسية</title>
+     <title>مترا للاستشارات الهندسية</title>
         <meta name="description" content="مقاولات الكويت إبداع في التصميم الهندسي والبناء بأفضل جودة" />
    </Helmet>
    
@@ -42,7 +42,7 @@ if(isLoading){
     <div className="background-image" style={{backgroundImage: `url(${bg})`}}></div> 
   
             <div className="hero-content-area">
-      <h1>  مترا للحلول الهندسية</h1>
+      <h1>  مترا استشارات هندسية</h1>
       <h3>    حلول هندسية بلا حدود  </h3>
       <h4>ستحصل على حلول هندسية ذكية، وخدمات إنشائية ذات جودة عالية، نستطيع جعل حلمك حقيقة</h4>
       {/* <Link to='tel:0096565666649'> */}
@@ -56,8 +56,8 @@ if(isLoading){
     </div>
    
     </section>
-    <section class="destinations">
-    <h3 class="title">بعض مشاريعنا</h3>
+    <section className="destinations">
+    <h3 className="title">بعض مشاريعنا</h3>
     <p>            شركة مترا للاستشارات الهندسية  . نعلم أنك مشغول دائما. لا يوجد لديك وقت كافٍ
     لبناء منزل حديث بواجهات عصرية ومساحات مريحة ضمن ميزانيتك المحدودة. لذا دعنا نهتم بذلك لك. فريقنا من المهندسيين المعماريين والإنشائيين ممتاز في ذلك. نعدك بذلك
 </p>
@@ -65,31 +65,31 @@ if(isLoading){
     </section>
 
   {projects}
-  <section class="packages">
-    <h3 class="title">صمم بيتك بنفسك</h3>
+  <section className="packages">
+    <h3 className="title">صمم بيتك بنفسك</h3>
     <p>يمكنك الآن تصميم بيتك بنفسك وإرسال مخططك لمهندسي الشركة وأنت في مكانك. دون الحاجة لزيارة الشركة. خدمة الكترونية تم تصميمها 
       بأيدي مهندسي برمجيات. نريد الأفضل لك ولعائلتك 
     </p>
     <hr />
 
-    <ul class="grid">
+    <ul className="grid">
       <li>
-        <i class="fas fa-dungeon fa-4x"></i>
+        <i className="fas fa-dungeon fa-4x"></i>
         <h4>مدخل المنزل</h4>
         <p>لرسم مدخل المنزل اختار هذه الأيقونة</p>
       </li>
       <li>
-        <i class="fas fa-tv fa-4x"></i>
+        <i className="fas fa-tv fa-4x"></i>
         <h4>صالة</h4>
         <p>تريد تحديد مكان الصالة؟ اختار أيقونة صالة</p>
       </li>
       <li>
-        <i class="fas fa-tree fa-4x"></i>
+        <i className="fas fa-tree fa-4x"></i>
         <h4>  حدائق داخلية</h4>
         <p> إذا أردت حديقة داخلية فاختر هذه الأيقونة</p>
       </li>
       <li>
-        <i class="fa fa-bicycle fa-4x"></i>
+        <i className="fa fa-bicycle fa-4x"></i>
         <h4>غرفة رياضة</h4>
         <p>للمحافظة علي لياقة جسمك لابد من تصميم غرفة رياضة فاختر هذه الأيقونة</p>
       </li>
@@ -98,8 +98,8 @@ if(isLoading){
     <CustomButton >  صمم بيتك  </CustomButton>   
   </Link>     
   </section>
-  <section class="contact">
-    <h3 class="title">من نحن </h3>
+  <section className="contact">
+    <h3 className="title">من نحن </h3>
     <p> هل تريد بناء منزل العمر؟ هل تريد تصميم بأفضل جودة والمزيد من المعلومات اتصل بنا</p>
     <Link to='/contactus'>
     <CustomButton > استشر مهندسنا </CustomButton>   

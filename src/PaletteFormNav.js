@@ -11,14 +11,17 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import AddToPhotosIcon from '@material-ui/icons/AddToPhotos';
+import Modal from './components/UI/Modal/Modal';
 
 import Button from '@material-ui/core/Button';
 import PaletteMetaForm from './PaletteMetaForm';
 import {DRAWER_WIDTH} from './constants';
 import sizes from './styles/sizes';
-
+import CustomButton from './components/customButton/customButton';
+import './PaletteFormNav.css';
 const drawerWidth = DRAWER_WIDTH;
-
+ 
+  
 const styles = theme => ({
   root: {
     display: 'flex',
@@ -93,24 +96,21 @@ const styles = theme => ({
   }
 })
  class PaletteFormNav extends Component {
+  
   constructor(props){
       super(props);
       this.state = {
           formShowing: false,
           floor: "Basement",
-          icons: this.props.icons
-       
-         
+          icons: this.props.icons,
+          showModal: false
+           
       }
-      this.handleChange = this.handleChange.bind(this);
-      this.handleFloorChange = this.handleFloorChange.bind(this);
-      this.saveDesign = this.saveDesign.bind(this);
-      this.sendDesign = this.sendDesign.bind(this);
-
-
-
-      this.showForm = this.showForm.bind(this);
-      this.hideForm = this.hideForm.bind(this);
+    
+      // this.handleChange = this.handleChange.bind(this);
+      // this.handleFloorChange = this.handleFloorChange.bind(this);
+      // this.showForm = this.showForm.bind(this);
+      // this.hideForm = this.hideForm.bind(this);
 
 
   }
@@ -119,15 +119,20 @@ const styles = theme => ({
       this.setState({ [e.target.name]: e.target.value})
     }
 
-    showForm () {
+    showForm = () =>{
       this.setState({formShowing: true})
     }
 
-    hideForm(){
+    hideForm = () => {
       this.setState({ formShowing: false})
     }
-
-    handleFloorChange(e) {
+     openModalHandler = () => {
+       this.setState({showModal: true});
+     }
+     closeModalHandler = () => {
+       this.setState({ showModal: false});
+     }
+    handleFloorChange = (e) => {
       this.setState({ floor: e.target.value });
       const newDesign = {
         floor: e.target.value,
@@ -136,14 +141,21 @@ const styles = theme => ({
       this.props.saveDesignWithFloor(newDesign);
 
     }
-    saveDesign() { 
-      this.props.saveDesign();
-    }
+   
 
-    sendDesign() {
-       this.props.handleSubmitDesign();
+    setShowModal = () => {
+       this.setState({ showModal: true})
   
     }
+
+    sendDesign = () => {
+        this.props.handleSubmitDesign();
+
+    }
+    saveDesign = () => {
+
+    }
+
     render() {
       
         const {classes, open,handleSubmitDesign, designs} = this.props;
@@ -168,9 +180,6 @@ const styles = theme => ({
             >
               <AddToPhotosIcon />
             </IconButton>
-            {/* <Typography variant="h6" noWrap>
-              Floor
-            </Typography> */}
           </Toolbar>
         
           <div className={classes.selectContainer}>
@@ -189,17 +198,19 @@ const styles = theme => ({
 
     </div>
 
-          <div className={classes.navBtns}>
-          
+          <div>
+          <Modal show={this.state.showModal} header={'تصميمك'} onCancel={this.closeModalHandler}  >
+            <p className="place-item__info">هل تريد الاستمرار وإرسال مخططك؟</p>
+            <div className="place-item__actions">
+            <CustomButton onClick={this.sendDesign}>نعم</CustomButton>
+            <CustomButton onClick={this.closeModalHandler}>لا</CustomButton>
+          </div>
+         </Modal>
      <Link to='/'>
      <Button className={classes.button} variant="contained" color='secondary'>Back</Button>
   </Link>
-
- 
-     
- 
-  <Button type='submit' className={classes.button} variant="contained" color="primary" 
-  onClick={this.sendDesign}>
+  <Button  className={classes.button} variant="contained" color="primary" 
+  onClick={this.setShowModal}>
     Send 
   </Button>
        

@@ -19,8 +19,6 @@ import IconPickerForm from './IconPickerForm';
  import axios from './axios-designs';
 import sizes from './styles/sizes';
 import FileUpload from './components/FileUpload/FileUpload';
-import { useHttpClient } from './shared/hooks/http-hook';
-
 
 const drawerWidth = DRAWER_WIDTH;
 
@@ -120,21 +118,12 @@ export default function NewPaletteForm(props) {
     maxIcons: 100
   };
     const classes = useStyles();
-    const { isLoading, error, sendRequest, clearError } = useHttpClient();
-
     const [open, setOpen] = React.useState(true);
     const [icons, setIcons] = useState([])
     const [iconsMoved, setIconsMoved] = useState([]);
     const [floor, setFloor] = useState("Basement");
     const [file, setFile] = useState('');
 
-    // const handleCurrentUser = () => {
-    //     switch (props.currentUser) {
-    //       case null:  return;
-    //        default: return props.currentUser.displayName;
-            
-    //     }
-    //   }
   
   
     const handleDrawerOpen = () => {
@@ -163,6 +152,7 @@ export default function NewPaletteForm(props) {
 
 const saveDesignWithFloor = (newDesign) => {
  setFloor(newDesign.floor)
+
 }
 
 const onInput = (id,pickedFile, isValid) => {
@@ -170,6 +160,7 @@ const onInput = (id,pickedFile, isValid) => {
 
 }
     const handleSubmitDesign = async () => {
+     
       const metadata = {
         contentType: 'image/jpeg',
       };
@@ -196,6 +187,7 @@ const onInput = (id,pickedFile, isValid) => {
       .then(response => {
       })
       alert(' تم الإرسال بنجاح')
+      
      }
      
       return (
@@ -210,7 +202,9 @@ const onInput = (id,pickedFile, isValid) => {
          المخطط والرخصة
 " />
    </Helmet>
+        
           <PaletteFormNav
+            icons={icons}
             open={open}
             handleDrawerOpen={handleDrawerOpen}
             handleSubmitDesign={handleSubmitDesign}
@@ -271,6 +265,8 @@ const onInput = (id,pickedFile, isValid) => {
        )
         : <p className={classes.textNo}>Choose Your Home Room by Clicking on it</p>
         }
+        
+  
           <FileUpload id="image" center onInput={onInput}/>
         </main>
        

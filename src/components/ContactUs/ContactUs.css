@@ -20,10 +20,10 @@
 
 .address {
     font-size: 18px;
-    position: absolute; 
+    /* position: absolute; 
     top: 600px;
      left: 200px;
-      right: 300px;
+      right: 300px; */
 
 }
 @media (min-width: 600px) {

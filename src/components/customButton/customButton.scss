@@ -1,8 +1,12 @@
+.buttons {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
 .custom-button {
     min-width: 165px;
    width: auto;
-    
-    height: 50px;
+  height: 50px;
     letter-spacing: 0.1px;
     line-height: 50px;
     // padding: 0 35px 0 35px;
@@ -13,8 +17,21 @@
     font-family: 'Open Sans Condensed';
     font-weight: bolder;
     border: none;
+    position: relative;
+    
+    
+   
     cursor: pointer;
-  
+  @media screen {
+    margin-left: -100px;
+
+  }
+    .Success{
+      color: #5C9210;
+    }
+    .Danger {
+      color: #944317;
+    }
     &:hover {
       background-color: white;
       color: black;

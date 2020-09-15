@@ -26,8 +26,9 @@ const Prices = (props) => {
 
     <section id="prices"> 
           <table id="pricesTable">
+              <thead className="trDirection">
               <tr className="trDirection">
-                    <th class="drag-column backlog-column">
+                    <th className="drag-column backlog-column">
                     
                     <span style={{ flex: "1", textAlign:"center"}}>البند</span>
           
@@ -43,7 +44,9 @@ const Prices = (props) => {
                              
                 </th>
               </tr>
-
+              </thead>
+           
+              <tbody>
               <tr className="trDirection">
                   <td className="drag-item">نظام الأسقف</td>
                   <td className="drag-item">جسور وبلاطات</td>
@@ -73,7 +76,7 @@ const Prices = (props) => {
                             <td className="drag-item">ترين أو عدساني أو اليوسفي بي في سي</td>
                            
                         </tr>   
-                        
+                       
                         <tr className="trDirection">
                                 <td className="drag-item">الكهرباء</td>
                                 <td  className="drag-item">صنادٌق ووايرات معتمدة, عدد 2 بلاك و 2 إنارة للغرف و 4 للصالات, تمديد تلفزٌون
@@ -192,15 +195,17 @@ const Prices = (props) => {
                                                                     <td className="drag-item">على نفقة المقاول مع تصميم واجهات تصميم داخلي مجانا</td>
                                                                 </tr>
 
-
-
-
-                                                                    <tr className="trDirection">
+                                                                <tr className="trDirection">
                                                                             <td className=" drag-item">سعر المتر</td>
                                                                             <td  className="priceLight  drag-item ">١٠٥ دينار كويتي</td>
                                                                             <td  className=" priceMid drag-item">١٣٥ دينار كويتي</td>
                                                                             <td  className=" priceHigh drag-item">١٨٥ دينار كويتي</td>    
                                                                         </tr>   
+
+
+                        </tbody>
+                      
+                                                                
                                                                
 
             </table>
